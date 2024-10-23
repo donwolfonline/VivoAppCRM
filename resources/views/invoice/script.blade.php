@@ -1,0 +1,21 @@
+<script src="{{ asset('public/custom_assets//libs/jquery/dist/jquery.min.js') }} "></script>
+<script type="text/javascript" src="{{ asset('js/html2pdf.bundle.min.js') }}"></script>
+<script>
+    function closeScript() {
+        setTimeout(function () {
+            window.open(window.location, '_self').close();
+        }, 1000);
+    }
+
+    $(window).on('load', function () {
+        var element = document.getElementById('boxes');
+        var opt = {
+            filename: '@if(\Auth::check()) {{Auth::user()->invoiceNumberFormat($invoice->invoice_id)}} @else {{\App\Models\User::invoiceNumberFormat($invoice->invoice_id)}}  @endif',
+            image: {type: 'jpeg', quality: 1},
+            html2canvas: {scale: 4, dpi: 72, letterRendering: true},
+            jsPDF: {unit: 'in', format: 'A4'}
+        };
+        html2pdf().set(opt).from(element).save().then(closeScript);
+    });
+
+</script>

@@ -1,0 +1,3 @@
+Name,SKU,Quantity,Vendor,Price,Cost,Tax,Category,Unit,Stock Status,Enable Status,Type,Description
+Product123,SKU123,10,Hughes,100,150,CGST;SGST,category123,PCS,In stock,Enable,product,test description
+Product456,SKU345,10,Eugene,100,150,CGST;,category123,PCS,Out of stock,Disable,product,test description

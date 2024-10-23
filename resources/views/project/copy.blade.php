@@ -1,0 +1,158 @@
+{{ Form::model($project, ['route' => ['project.copy.store', $project->id], 'method' => 'POST']) }}
+<div class="row">
+    <div class="col-12">
+        <div class="form-group m-2">
+            <div class="form-check">
+                {{ Form::checkbox('project', 'all', '', ['class' => 'form-check-input ', 'id' => 'all']) }}
+                {{ Form::label('all', __('All'), ['class' => 'form-check-label']) }}
+            </div>
+        </div>
+        {{-- project task --}}
+        <div class="form-group m-2">
+            <div class="form-check">
+                {{ Form::checkbox('task[]', 'task', '', ['class' => 'form-check-input checkbox', 'id' => 'task']) }}
+                {{ Form::label('task', __('Task'), ['class' => 'form-check-label']) }}
+            </div>
+        </div>
+        <div class="row mx-4">
+            <div class="col-4 form-group">
+                <div class="form-check">
+                    {{ Form::checkbox('task[]', 'task_checklist', '', ['class' => 'form-check-input checkbox task', 'id' => 'task_checklist']) }}
+                    {{ Form::label('task_checklist', __('Checklist'), ['class' => 'form-check-label']) }}
+                </div>
+            </div>
+            <div class="col-4 form-group">
+                <div class="form-check">
+                    {{ Form::checkbox('task[]', 'task_comment', '', ['class' => 'form-check-input checkbox task', 'id' => 'task_comment']) }}
+                    {{ Form::label('task_comment', __('Comment'), ['class' => 'form-check-label']) }}
+                </div>
+            </div>
+            <div class="col-4 form-group">
+                <div class="form-check">
+                    {{ Form::checkbox('task[]', 'task_files', '', ['class' => 'form-check-input checkbox task', 'id' => 'task_files']) }}
+                    {{ Form::label('task_files', __('Files'), ['class' => 'form-check-label']) }}
+                </div>
+            </div>
+        </div>
+        {{-- project bug --}}
+        {{-- <div class="form-group m-2">
+            <div class="form-check">
+                {{ Form::checkbox('bug[]', 'bug', '', ['class' => 'form-check-input checkbox', 'id' => 'bug']) }}
+                {{ Form::label('bug', __('Bug'), ['class' => 'form-check-label']) }}
+            </div>
+        </div>
+        <div class="row mx-4">
+            <div class="col-6 form-group">
+                <div class="form-check">
+                    {{ Form::checkbox('bug[]', 'bug_comment', '', ['class' => 'form-check-input checkbox bug', 'id' => 'bug_comment']) }}
+                    {{ Form::label('bug_comment', __('Comment'), ['class' => 'form-check-label']) }}
+                </div>
+            </div>
+            <div class="col-6 form-group">
+                <div class="form-check">
+                    {{ Form::checkbox('bug[]', 'bug_files', '', ['class' => 'form-check-input checkbox bug', 'id' => 'bug_files']) }}
+                    {{ Form::label('bug_files', __('Files'), ['class' => 'form-check-label']) }}
+                </div>
+            </div>
+        </div> --}}
+        <div class="form-group m-2">
+            <div class="form-check">
+                {{ Form::checkbox('notes[]', 'notes', '', ['class' => 'form-check-input checkbox', 'id' => 'notes']) }}
+                {{ Form::label('notes', __('Notes'), ['class' => 'form-check-label']) }}
+            </div>
+        </div>
+
+        <div class="form-group m-2">
+            <div class="form-check">
+                {{ Form::checkbox('comments[]', 'comments', '', ['class' => 'form-check-input checkbox', 'id' => 'comments']) }}
+                {{ Form::label('comments', __('Comments'), ['class' => 'form-check-label']) }}
+            </div>
+        </div>
+
+
+        <div class="form-group m-2">
+            <div class="form-check">
+                {{ Form::checkbox('user[]', 'user', '', ['class' => 'form-check-input checkbox', 'id' => 'user']) }}
+                {{ Form::label('user', __('Team Member'), ['class' => 'form-check-label']) }}
+            </div>
+        </div>
+
+        <div class="form-group m-2">
+            <div class="form-check">
+                {{ Form::checkbox('milestone[]', 'milestone', '', ['class' => 'form-check-input checkbox', 'id' => 'milestone']) }}
+                {{ Form::label('milestone', __('Milestone'), ['class' => 'form-check-label']) }}
+            </div>
+        </div>
+        <div class="form-group m-2">
+            <div class="form-check">
+                {{ Form::checkbox('project_file[]', 'project_file', '', ['class' => 'form-check-input checkbox', 'id' => 'project_file']) }}
+                {{ Form::label('project_file', __('Project File'), ['class' => 'form-check-label']) }}
+            </div>
+        </div>
+        {{-- <div class="form-group m-2">
+            <div class="form-check">
+                {{ Form::checkbox('activity[]', 'activity', '', ['class' => 'form-check-input checkbox', 'id' => 'activity']) }}
+                {{ Form::label('activity', __('Activity'), ['class' => 'form-check-label']) }}
+            </div>
+        </div> --}}
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn  btn-light" data-bs-dismiss="modal">{{ __('Close') }}</button>
+    <button type="submit" class="btn  btn-primary">{{ __('Copy') }}</button>
+</div>
+
+{{ Form::close() }}
+
+<script>
+    $(document).ready(function() {
+        $('#all').on('click', function() {
+            if (this.checked) {
+                $('.checkbox').each(function() {
+                    this.checked = true;
+                });
+            } else {
+                $('.checkbox').each(function() {
+                    this.checked = false;
+                });
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#task_checklist").click(function() {
+            $("#task").prop("checked", true);
+        });
+        $("#task_comment").click(function() {
+            $("#task").prop("checked", true);
+        });
+        $("#task_files").click(function() {
+            $("#task").prop("checked", true);
+        });
+        $("#bug_comment").click(function() {
+            $("#bug").prop("checked", true);
+        });
+        $("#bug_files").click(function() {
+            $("#bug").prop("checked", true);
+        });
+
+        $('#task').on('click', function() {
+            $('.task').each(function() {
+                this.checked = false;
+            });
+        });
+        $('#notes').on('click', function() {
+            $('.notes').each(function() {
+                this.checked = false;
+            });
+        });
+
+        $('#comments').on('click', function() {
+            $('.comments').each(function() {
+                this.checked = false;
+            });
+        });
+    });
+</script>
